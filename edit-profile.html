@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <button class="back-btn" onclick='openPage("index.html")'>Back</button>
+    <h1>Edit Profile</h1>
+    <form id="new-profile-form">
+        <div class="form-section">
+            <label for="profile-name">Name:</label>
+            <input type="text" id="profile-name" name="profile-name" required>
+        </div>
+
+        <div class="form-section">
+            <label for="profile-biography">Biography:</label>
+            <textarea id="profile-biography" name="profile-biography" rows="4"></textarea>
+        </div>
+
+        <div class="form-section">
+            <label for="profile-dob">Date of Birth:</label>
+            <input type="date" id="profile-dob" name="profile-dob" required>
+        </div>
+
+        <div class="form-section">
+            <fieldset>
+                <legend>Gender:</legend>
+                <div class="two-columns">
+                    <label>
+                        <input type="radio" id="gender-male" name="profile-gender" value="Male">
+                        Male
+                    </label>
+                    <label>
+                        <input type="radio" id="gender-female" name="profile-gender" value="Female">
+                        Female
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="form-section">
+            <fieldset>
+                <legend>Hobbies:</legend>
+                <div class="two-columns">
+                    <label>
+                        <input type="checkbox" id="hobby-hiking" name="profile-hobbies" value="Hiking">
+                        Hiking
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-photography" name="profile-hobbies" value="Photography">
+                        Photography
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-reading" name="profile-hobbies" value="Reading">
+                        Reading
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-writing" name="profile-hobbies" value="Writing">
+                        Writing
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-sports" name="profile-hobbies" value="Sports">
+                        Sports
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-art" name="profile-hobbies" value="Art">
+                        Art
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-gaming" name="profile-hobbies" value="Gaming">
+                        Gaming
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-music" name="profile-hobbies" value="Music">
+                        Music
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-cooking" name="profile-hobbies" value="Cooking">
+                        Cooking
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hobby-movies" name="profile-hobbies" value="Movies">
+                        Movies
+                    </label>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="form-section">
+            <label for="profile-color">Profile Color:</label>
+            <input type="color" id="profile-color" name="profile-color" style="width: 100px; height: 50px;">
+        </div>
+
+        <button class="create-btn" type="submit" onclick="editProfile(event)">Save Changes</button>
+    </form>
+
+	<script src="js/scripts.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const index = urlParams.get('index');
+        const profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+
+        if (index !== null && profiles[index]) {
+            const profile = profiles[index];
+            document.getElementById('profile-name').value = profile.name || '';
+            document.getElementById('profile-biography').value = profile.biography || '';
+            document.getElementById('profile-dob').value = profile.dob || '';
+            document.querySelector(`input[name="profile-gender"][value="${profile.gender}"]`).checked = true;
+            const hobbies = profile.hobbies || [];
+            hobbies.forEach(hobby => {
+                const checkbox = document.querySelector(`input[name="profile-hobbies"][value="${hobby}"]`);
+                if (checkbox) checkbox.checked = true;
+            });
+            document.getElementById('profile-color').value = profile.color || '#ffffff';
+        }
+    </script>
+	
+</body>
+</html>

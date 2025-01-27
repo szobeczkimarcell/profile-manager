@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+	<link rel="stylesheet" href="css/styles.css">
+    <style>
+        .profile-table {
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+			table-layout: fixed;
+        }
+
+        .profile-table th,
+        .profile-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .profile-table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #333;
+			width: 150px;
+        }
+
+        .profile-table td {
+            background-color: #fff;
+        }
+
+        .profile-table tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        .profile-table ul {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick='openPage("index.html")'>Back</button>
+    <table class="profile-table">
+        <tr>
+            <th>Name</th>
+            <td id="profile-name">Name</td>
+        </tr>
+        <tr>
+            <th>Biography</th>
+            <td id="profile-biography">Biography</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td id="profile-dob">Date of Birth</td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td id="profile-gender">Gender</td>
+        </tr>
+        <tr>
+            <th>Hobbies</th>
+            <td id="profile-hobbies">
+                <ul></ul>
+            </td>
+        </tr>
+    </table>
+	<button class="edit-btn" onclick="openEditPage()">Edit</button>
+
+	<script src="js/scripts.js"></script>
+    <script>
+		displayProfile();
+		const urlParams = new URLSearchParams(window.location.search);
+		const index = urlParams.get('index');
+		function openEditPage(){
+			window.location.href = `edit-profile.html?index=${index}`;
+		}
+    </script>
+	
+</body>
+</html>
